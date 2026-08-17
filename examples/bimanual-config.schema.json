@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/LV-Robotics-Lab/realman_wrapper/bimanual-config.schema.json",
+  "title": "LV Robotics RealMan bimanual config",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "left", "right"],
+  "properties": {
+    "schema": {"const": "lv_robotics.realman_bimanual_config.v1"},
+    "left": {"$ref": "#/$defs/arm"},
+    "right": {"$ref": "#/$defs/arm"}
+  },
+  "$defs": {
+    "endpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["host", "port"],
+      "properties": {
+        "host": {"type": "string", "minLength": 1},
+        "port": {"type": "integer", "minimum": 1, "maximum": 65535}
+      }
+    },
+    "stream": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "kind"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "kind": {"type": "string", "minLength": 1},
+        "remote_endpoint": {"$ref": "#/$defs/endpoint"},
+        "local_endpoint": {"$ref": "#/$defs/endpoint"},
+        "max_age_s": {"type": "number", "exclusiveMinimum": 0}
+      }
+    },
+    "arm": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["side", "robot_serial", "calibration_file", "max_joint_step"],
+      "properties": {
+        "side": {"enum": ["left", "right"]},
+        "robot_serial": {"type": "string", "minLength": 1},
+        "calibration_file": {"type": "string", "minLength": 1},
+        "joint_names": {
+          "type": "array",
+          "minItems": 7,
+          "maxItems": 7,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "joint_unit": {"enum": ["radians", "degrees"]},
+        "max_joint_step": {
+          "type": "array",
+          "minItems": 7,
+          "maxItems": 7,
+          "items": {"type": "number", "exclusiveMinimum": 0}
+        },
+        "max_gripper_step": {"type": ["number", "null"], "exclusiveMinimum": 0},
+        "follower_endpoint": {"$ref": "#/$defs/endpoint"},
+        "gripper_endpoint": {"$ref": "#/$defs/endpoint"},
+        "max_state_age_s": {"type": "number", "exclusiveMinimum": 0},
+        "max_command_age_s": {"type": "number", "exclusiveMinimum": 0},
+        "authorization_ttl_s": {"type": "number", "exclusiveMinimum": 0},
+        "streams": {"type": "array", "items": {"$ref": "#/$defs/stream"}}
+      }
+    }
+  }
+}
