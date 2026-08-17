@@ -70,5 +70,6 @@ CI covers known injected poses, both sides, exact joint order, radians-to-degree
 conversion, quaternion order, identity-frame reset, malformed inputs, malformed
 vendor results, source/license/hash checks, and an opt-in publisher-library smoke
 test on Linux. No physical RM75 or endpoint was used. The publisher smoke proves
-only deterministic offline library execution; it is not calibration or live-robot
-validation.
+only deterministic offline library execution and locks the audited zero-joint
+reference pose `(0, 0, 0.8504999876 m; identity quaternion)`; it is not
+calibration or live-robot validation.

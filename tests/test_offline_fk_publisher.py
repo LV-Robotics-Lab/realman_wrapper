@@ -1,6 +1,5 @@
 """Opt-in test for the exact publisher artifact; never creates a robot handle."""
 
-import json
 import os
 
 import pytest
@@ -18,7 +17,7 @@ pytestmark = pytest.mark.skipif(
 
 
 @pytest.mark.parametrize("side", ["left", "right"])
-def test_publisher_zero_pose_is_finite_offline_and_records_provenance(side, capsys):
+def test_publisher_zero_pose_matches_audited_offline_reference(side):
     backend = make_tac_infra_rm75_backend()
     pose = backend.forward(
         (0.0,) * 7,
@@ -26,18 +25,8 @@ def test_publisher_zero_pose_is_finite_offline_and_records_provenance(side, caps
         joint_names=TAC_INFRA_JOINT_NAMES[side],
         joint_unit="radians",
     )
-    print(
-        json.dumps(
-            {
-                "side": side,
-                "position_m": pose.position_m,
-                "quaternion_xyzw": pose.quaternion_xyzw,
-            },
-            sort_keys=True,
-        )
-    )
-    assert len(pose.position_m) == 3
-    assert len(pose.quaternion_xyzw) == 4
+    assert pose.position_m == pytest.approx((0.0, 0.0, 0.8504999876022339))
+    assert pose.quaternion_xyzw == pytest.approx((0.0, 0.0, 0.0, 1.0))
     assert pose.base_frame == f"{side}_base"
     assert pose.tool_frame == f"{side}_flange"
     assert backend.provenance["source_revision"] == VENDOR_SOURCE_REVISION
