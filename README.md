@@ -18,6 +18,9 @@ being folded into the arm driver.
   while producing this repository.
 - A vendor adapter and an operator-reviewed device calibration are still
   required for any hardware use.
+- The optional tac-infra RM75 FK factory is offline-only, verifies an externally
+  installed publisher artifact, and creates no robot handle. See
+  [docs/OFFLINE_FK.md](docs/OFFLINE_FK.md).
 - The historical uGripper path used a Lingkong gRPC/CAN service. There is no
   evidence that its command or calibration contract is compatible with
   TacClaw, so this repository makes no such claim.
@@ -97,6 +100,11 @@ motion. Tests show the calibrated, fake-only motion path.
 
 See [docs/BACKEND_INTEGRATION.md](docs/BACKEND_INTEGRATION.md) for the adapter
 contract and [docs/PROVENANCE.md](docs/PROVENANCE.md) for the exact source map.
+
+For offline tac-infra joint-to-EE dataset conversion, use the reviewed
+`realman_wrapper.offline_fk:make_tac_infra_rm75_backend` factory described in
+[docs/OFFLINE_FK.md](docs/OFFLINE_FK.md). The publisher package is not a normal
+or optional dependency of this project and is never redistributed here.
 
 ## Tests
 

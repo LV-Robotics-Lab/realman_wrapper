@@ -55,8 +55,13 @@ private SDKs or implicit host routing.
 
 An FK adapter receives a `ForwardKinematicsRequest` containing side, exact joint
 order, joint unit, base frame, and tool frame. It must return the requested frame
-names and an `xyzw` unit quaternion. The wrapper does not import the RealMan
+names and an `xyzw` unit quaternion. The core does not import the RealMan
 algorithm library and does not assume a policy's left-first/right-first layout.
+
+The separately reviewed tac-infra adapter is documented in
+[`OFFLINE_FK.md`](OFFLINE_FK.md). Its explicit factory verifies and lazily imports
+an operator-installed publisher artifact; the package remains absent from the
+wrapper's normal dependencies.
 
 ## Adapter validation checklist
 

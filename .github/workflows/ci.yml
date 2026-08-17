@@ -18,3 +18,18 @@ jobs:
       - run: python -m pip install -e '.[test]'
       - run: python -m pytest -q
       - run: ruff check .
+
+  publisher-offline-fk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -e '.[test]'
+      - name: Install exact publisher artifact without redistributing it
+        run: python -m pip install --require-hashes -r requirements/vendor-rm-api2.lock
+      - name: Run publisher algorithm without a robot handle or endpoint
+        run: python -m pytest -q -s tests/test_offline_fk_publisher.py
+        env:
+          REALMAN_WRAPPER_RUN_PUBLISHER_FK: "1"
