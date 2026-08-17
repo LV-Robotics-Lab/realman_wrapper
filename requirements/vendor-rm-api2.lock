@@ -1,0 +1,4 @@
+# Publisher artifact used only by the opt-in, offline FK CI job. realman_wrapper does not
+# redistribute it or install it as a package dependency. See docs/OFFLINE_FK.md.
+robotic-arm==1.1.6 \
+    --hash=sha256:c564f4809836382ce5d58fc6bfc28b0f21f7ebad9ca56038d4da952910cbedd3

@@ -45,6 +45,16 @@ from .model import (
     ScalarSample,
     Side,
 )
+from .offline_fk import (
+    TAC_INFRA_FK_SCHEMA,
+    TAC_INFRA_FRAMES,
+    TAC_INFRA_JOINT_NAMES,
+    VENDOR_SOURCE_REVISION,
+    FrameConvention,
+    OfflineForwardKinematicsResult,
+    TacInfraRM75OfflineFKBackend,
+    make_tac_infra_rm75_backend,
+)
 
 __all__ = [
     "CALIBRATION_SCHEMA",
@@ -63,6 +73,7 @@ __all__ = [
     "FakeFrameStreamBackend",
     "FakeLeaderBackend",
     "FakeUGripperBackend",
+    "FrameConvention",
     "FisheyeStreamBackend",
     "FluxTactileBackend",
     "FollowerArm",
@@ -82,6 +93,7 @@ __all__ = [
     "MotionAuthorizationError",
     "MotionTarget",
     "NetworkEndpoint",
+    "OfflineForwardKinematicsResult",
     "RealManWrapperError",
     "SafetyViolation",
     "ScalarSample",
@@ -89,6 +101,12 @@ __all__ = [
     "Side",
     "StaleSampleError",
     "StreamConfig",
+    "TAC_INFRA_FK_SCHEMA",
+    "TAC_INFRA_FRAMES",
+    "TAC_INFRA_JOINT_NAMES",
+    "TacInfraRM75OfflineFKBackend",
     "UGripperBackend",
+    "VENDOR_SOURCE_REVISION",
     "load_bimanual_config",
+    "make_tac_infra_rm75_backend",
 ]

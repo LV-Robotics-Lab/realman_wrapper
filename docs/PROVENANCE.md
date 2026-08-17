@@ -77,3 +77,12 @@ into this repository.
   the exact revisions.
 - Training-specific 16D and 20D layouts are intentionally not promoted to the
   hardware API. Side order and FK frames remain explicit at every boundary.
+
+## Offline publisher FK evidence
+
+The isolated tac-infra FK adapter targets the public RealMan `Algo` API at
+`RealManRobot/RM_API2@9d75cc995f52095837dddca594531621be18cf7b` and the
+byte-matched PyPI publisher artifact `robotic-arm==1.1.6`. Exact artifact and
+file hashes, the incomplete standalone-license evidence, and the non-redistribution
+decision are recorded in [`OFFLINE_FK.md`](OFFLINE_FK.md). No SDK source or binary
+is copied into this repository.
